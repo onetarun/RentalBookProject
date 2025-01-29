@@ -1,0 +1,6 @@
+@BookRentAPI_HostAddress = http://localhost:5278
+
+GET {{BookRentAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
