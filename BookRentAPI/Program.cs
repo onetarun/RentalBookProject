@@ -22,7 +22,7 @@ namespace BookRentAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            // Middleware Pipeline
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
