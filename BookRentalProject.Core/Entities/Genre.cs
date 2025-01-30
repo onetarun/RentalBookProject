@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookRentalProject.Infrastructure.Interfaces.Repository
+namespace BookRentalProject.Core.Entities
 {
-    public class Category
+    public class Genre
     {
 
     }

@@ -11,38 +11,38 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookRentalProject.Infrastructure.Interfaces.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class GenericRepo<T> : IGenericRepo<T> where T : class
     {
         private readonly ApplicationDbContext _context;
         private DbSet<T> _dbSet;
 
-        public Repository(ApplicationDbContext context)
+        public GenericRepo(ApplicationDbContext context)
         {
 
             _context = context;
             _dbSet = context.Set<T>();
         }
-        public void Add(T entity)
+        public void Add(T Entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(T entity)
+        public void Delete(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public void deleterange(IEnumerable<T> entity)
+        public void DeleteRange(IEnumerable<T> Entity)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> GetAll(System.Linq.Expressions.Expression<Func<T, bool>>? predicate = null, string? includProperties = null)
+        public IEnumerable<T> GetAll(System.Linq.Expressions.Expression<Func<T, bool>>? predicate = null, string? includeProperties = null)
         {
             throw new NotImplementedException();
         }
 
-        public T getT(System.Linq.Expressions.Expression<Func<T, bool>>? predicate, string? includProperties = null)
+        public T GetByID(System.Linq.Expressions.Expression<Func<T, bool>>? predicate, string? includeProperties = null)
         {
             throw new NotImplementedException();
         }

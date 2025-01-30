@@ -15,7 +15,7 @@ namespace BookRentalProject.Infrastructure.Data
         {
         }
 
-        public DbSet<Book> Book { get; set; }
-        public DbSet<Category> Category { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Genre> Genres { get; set; }
     }
 }
