@@ -8,6 +8,7 @@ namespace BookRentalProject.Core.Entities
 {
     public class Genre
     {
+        //comm
 
     }
 }
