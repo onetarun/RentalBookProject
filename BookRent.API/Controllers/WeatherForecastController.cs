@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookRentAPI.Controllers
+namespace BookRent.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

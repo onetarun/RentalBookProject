@@ -1,4 +1,4 @@
-namespace BookRentAPI
+namespace BookRent.API
 {
     public class WeatherForecast
     {
