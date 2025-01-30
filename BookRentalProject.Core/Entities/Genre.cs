@@ -8,6 +8,6 @@ namespace BookRentalProject.Core.Entities
 {
     public class Genre
     {
-
+        //commented by Rajendra Ram
     }
 }
