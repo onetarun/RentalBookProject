@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookRentAPI", "BookRentAPI\BookRentAPI.csproj", "{2CA445A2-3374-4915-8AD3-460E3DF661BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookRent.API", "BookRent.API\BookRent.API.csproj", "{2CA445A2-3374-4915-8AD3-460E3DF661BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookRentalProject.CommonHelper", "BookRentalProject.CommonHelper\BookRentalProject.CommonHelper.csproj", "{2A2D5949-4CD7-4B39-8B02-DBD93654ED33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookRent.Application", "BookRent.Application\BookRent.Application.csproj", "{2A2D5949-4CD7-4B39-8B02-DBD93654ED33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookRentalProject.Infrastructure", "BookRentalProject.DataAccessLayer\BookRentalProject.Infrastructure.csproj", "{36AC3A2E-11F0-4D07-8F46-D0F3BFE76B8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookRent.Infrastructure", "BookRent.Infrastructure\BookRent.Infrastructure.csproj", "{36AC3A2E-11F0-4D07-8F46-D0F3BFE76B8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookRentalProject.Core", "BookRentalProject.Core\BookRentalProject.Core.csproj", "{38D7C32A-9436-4A20-92C6-66A79C241F96}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookRent.Domain", "BookRent.Domain\BookRent.Domain.csproj", "{38D7C32A-9436-4A20-92C6-66A79C241F96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookRentalProject.App", "BookRentalProject.App\BookRentalProject.App.csproj", "{60BE238E-7F13-4FCA-B0B9-79F6B88A81BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookRent.App", "BookRent.App\BookRent.App.csproj", "{60BE238E-7F13-4FCA-B0B9-79F6B88A81BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

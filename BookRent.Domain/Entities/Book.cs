@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookRentalProject.Core.Entities
+namespace BookRent.Domain.Entities
 {
     public class Book
     {

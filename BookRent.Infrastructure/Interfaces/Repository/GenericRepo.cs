@@ -4,12 +4,13 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookRentalProject.Infrastructure.Data;
-using BookRentalProject.Infrastructure.Interfaces.IRepository;
+
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using BookRent.Infrastructure.Interfaces.IRepository;
+using BookRent.Infrastructure.Data;
 
-namespace BookRentalProject.Infrastructure.Interfaces.Repository
+namespace BookRent.Infrastructure.Interfaces.Repository
 {
     public class GenericRepo<T> : IGenericRepo<T> where T : class
     {

@@ -1,8 +1,8 @@
 using System.Diagnostics;
-using BookRentalProject.App.Models;
+using BookRent.App.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookRentalProject.App.Controllers
+namespace BookRent.App.Controllers
 {
     public class HomeController : Controller
     {

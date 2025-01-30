@@ -4,10 +4,11 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookRent.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using BookRentalProject.Core.Entities;
 
-namespace BookRentalProject.Infrastructure.Data
+
+namespace BookRent.Infrastructure.Data
 {
     public class ApplicationDbContext : DbContext
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookRentalProject.Core.Entities
+namespace BookRent.Infrastructure.Interfaces.Repository
 {
-    public class Genre
+    public class GenreRepo
     {
-        //commented by Rajendra Ram...test
+
     }
 }

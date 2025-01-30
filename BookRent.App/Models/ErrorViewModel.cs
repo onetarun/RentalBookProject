@@ -1,4 +1,4 @@
-namespace BookRentalProject.App.Models
+namespace BookRent.App.Models
 {
     public class ErrorViewModel
     {
