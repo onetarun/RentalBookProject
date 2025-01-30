@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace BookRentalProject.Infrastructure.Interfaces.Repository
 {
-    internal class BookRepo
+    public class BookRepo
     {
         //test
+
 
     }
 }
