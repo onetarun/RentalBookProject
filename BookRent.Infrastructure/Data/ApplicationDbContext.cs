@@ -10,12 +10,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookRent.Infrastructure.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-        }
-
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
     }

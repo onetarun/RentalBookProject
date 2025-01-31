@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookRent.Infrastructure.Interfaces.IRepository
+namespace BookRent.Application.Interfaces.IRepository
 {
     public interface IGenericRepo<T> where T : class
     {

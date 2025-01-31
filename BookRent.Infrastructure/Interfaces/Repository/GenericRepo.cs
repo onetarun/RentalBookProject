@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using BookRent.Infrastructure.Interfaces.IRepository;
+using BookRent.Application.Interfaces.IRepository;
 using BookRent.Infrastructure.Data;
 
 namespace BookRent.Infrastructure.Interfaces.Repository
