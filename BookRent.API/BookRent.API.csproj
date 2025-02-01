@@ -25,6 +25,7 @@
 	</ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookRent.Application\BookRent.Application.csproj" />
+    <ProjectReference Include="..\BookRent.Infrastructure\BookRent.Infrastructure.csproj" />
     
     
   </ItemGroup>

@@ -9,6 +9,9 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 	<ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.12" />
+	</ItemGroup>
+	<ItemGroup>
 	  <ProjectReference Include="..\BookRent.Domain\BookRent.Domain.csproj" />
 	  
 	</ItemGroup>

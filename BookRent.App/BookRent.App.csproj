@@ -15,5 +15,10 @@
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
 	</ItemGroup>
-	
+	<ItemGroup>
+	  
+	  <ProjectReference Include="..\BookRent.Application\BookRent.Application.csproj" />
+	  
+	  <ProjectReference Include="..\BookRent.Infrastructure\BookRent.Infrastructure.csproj" />
+	</ItemGroup>
 </Project>
