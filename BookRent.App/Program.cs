@@ -1,7 +1,18 @@
+using Microsoft.Extensions.Options;
+using BookRent.App.Common;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.Configure<MyApiSettings>(builder.Configuration.GetSection("MyApiSettings"));
+
+builder.Services.AddHttpClient("MyAPIClient", (serviceProvider, client) =>
+{
+    var appSettings = serviceProvider.GetRequiredService<IOptions<MyApiSettings>>().Value;
+    client.BaseAddress = new Uri(appSettings.BaseAddress);
+});
+
 
 var app = builder.Build();
 
