@@ -17,6 +17,7 @@ namespace BookRent.Infrastructure.Interfaces.Repository
         private readonly ApplicationDbContext _context;
         private DbSet<T> _dbSet;
 
+
         public GenericRepo(ApplicationDbContext context)
         {
 
