@@ -102,23 +102,36 @@ namespace BookRent.App.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(VMGenre genres)
+        public async Task<IActionResult> Edit(VMGenre genre)
         {
+            var genres = new Genre();
+            var response = await _httpClient.GetAsync($"api/Genre/{genre.GenreID}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                genres = JsonConvert.DeserializeObject<Genre>(jsonString);
+                genres.GenreCategory = genre.GenreCategory;
+            }
             using (HttpClient client = new HttpClient())
             {
                 var json = JsonConvert.SerializeObject(genres);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await _httpClient.PutAsync("api/Genre", content);
-                if (response.IsSuccessStatusCode)
+
+                HttpResponseMessage responseMsg = await _httpClient.PutAsync("api/Genre", content);
+
+                if (responseMsg.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");
                 }
             }
-            return RedirectToAction("Index");
+
+
+            return RedirectToAction("Index");           
 
         }
 
-        [HttpDelete]
+        //[HttpDelete]
         public async Task<IActionResult> Delete(int Id)
         {
             var response = await _httpClient.DeleteAsync($"api/Genre/{Id}");
