@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Create";
 }
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <div class="container">
     <form asp-action="Create" method="post">
         <div class="row">
@@ -16,3 +18,28 @@
         </div>
     </form>
 </div>
+
+@* <script>
+    function saveGenre() {
+        var genre = {
+            GenreCategory: $("#GenreCategory").val()
+        };
+
+        $.ajax({
+            url: '/Genre/Create',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(genre),
+            success: function () {
+                alert("Genre saved successfully!");
+                window.location.href = "/Genre/Index";
+            },
+            error: function () {
+                alert("Error occurred while saving!");
+            }
+        });
+    }
+</script>
+
+<input type="text" id="Name" class="form-control" />
+<button onclick="saveGenre()">Save</button> *@
