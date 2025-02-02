@@ -44,7 +44,7 @@ namespace BookRent.Infrastructure.Data
         //}
 
         //// Define DbSets for your entities (e.g., Book, User)
-        //public DbSet<Book> Books { get; set; }
-        //public DbSet<Genre> Genres { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Genre> Genres { get; set; }
     }
 }

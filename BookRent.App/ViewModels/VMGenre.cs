@@ -4,5 +4,6 @@
     {
         public int GenreID { get; set; }
         public string GenreCategory { get; set; }
+       // public DateTime Created { get; set; }
     }
 }
