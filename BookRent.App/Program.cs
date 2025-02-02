@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.Configure<MyApiSettings>(builder.Configuration.GetSection("MyApiSettings"));
 
 builder.Services.AddHttpClient("MyAPIClient", (serviceProvider, client) =>

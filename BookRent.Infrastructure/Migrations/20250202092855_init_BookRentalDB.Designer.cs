@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookRent.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250201064308_BookDBInitial")]
-    partial class BookDBInitial
+    [Migration("20250202092855_init_BookRentalDB")]
+    partial class init_BookRentalDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
