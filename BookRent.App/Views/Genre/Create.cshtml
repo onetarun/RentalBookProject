@@ -1,0 +1,18 @@
+﻿@using BookRent.App.ViewModels
+@model VMGenre
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container">
+    <form asp-action="Create" method="post">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="GenreCategory"></label>
+                    <input asp-for="GenreCategory" class="form-control" />
+                </div>             
+                <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

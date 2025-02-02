@@ -43,6 +43,7 @@ namespace BookRent.Infrastructure.Data
         //    base.OnModelCreating(modelBuilder);
         //}
 
+        //// Define DbSets for your entities (e.g., Book, User)
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
     }

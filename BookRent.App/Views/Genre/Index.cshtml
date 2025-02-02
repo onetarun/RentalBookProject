@@ -1,0 +1,46 @@
+﻿@using BookRent.App.ViewModels
+@model List<VMGenre>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Genre List</h1>
+<a class="btn btn-primary" asp-action="Create" asp-controller="Genre">Add New Genre</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                GenreID
+            </th>
+            <th>
+                GenreCategory
+            </th>
+            @* <th>
+                Description
+            </th> *@
+            </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.GenreID
+                </td>
+                <td>
+                    @item.GenreCategory
+                </td>
+               @*  <td>
+                    @item.Description
+                </td> *@
+                
+                <td>
+                    <a class="btn btn-info" asp-action="Edit" asp-controller="Genre" asp-route-id="@item.GenreID">Edit</a>
+                    <a class="btn btn-info" asp-action="Delete" asp-controller="Genre" asp-route-id="@item.GenreID">Delete</a>
+                </td>
+            </tr>
+        }
+       
+    </tbody>
+    </table>
+
