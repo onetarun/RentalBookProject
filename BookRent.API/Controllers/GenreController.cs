@@ -44,6 +44,88 @@ namespace BookRent.API.Controllers
             return Ok(genres);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateGenre(int id, [FromBody] Genre genre)
+        {
+            if (id != genre.GenreID)
+            {
+                return BadRequest("Genre ID mismatch.");
+            }
+
+            try
+            {
+                await _unitOfWork.Genre.UpdategenreAsync(genre);
+                 
+                return Ok("Genre updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteGenre(int id)
+        {
+            var genre = await _unitOfWork.Genre.GetByIdAsync(id);
+            if (genre == null)
+            {
+                return NotFound("Genre not found.");
+            }
+
+            try
+            {
+                 _unitOfWork.Genre.Delete(id);
+                // _unitOfWork.SaveChangesAsync();
+                return Ok("Genre deleted successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpPost]
+        public IActionResult AddGenre([FromBody] Genre genre)
+        {
+            if (genre == null)
+            {
+                return BadRequest("Genre cannot be null.");
+            }
+
+            try
+            {
+                   _unitOfWork.Genre.Add(genre);
+                return Ok("Genre updated successfully.");
+                //await _unitOfWork.SaveChangesAsync();
+                //return CreatedAtAction(nameof(GetAllGenresWithBooks), new { id = genre.GenreID }, genre);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetGenreById(int id)
+        {
+            try
+            {
+                var genre = await _unitOfWork.Genre.GetByIdAsync(id);
+
+                if (genre == null)
+                {
+                    return NotFound($"Genre with ID {id} not found.");
+                }
+
+                return Ok(genre);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
 
     }
 }

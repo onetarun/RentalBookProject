@@ -25,10 +25,12 @@ namespace BookRent.Infrastructure.Interfaces.Repository
 
 
 
-        public async Task UpdateBookAsync(Genre genre)
+        public async Task UpdategenreAsync(Genre genre)
         {
             _context.Set<Genre>().Update(genre);
             await (_context as ApplicationDbContext).SaveChangesAsync();
         }
+
+
     }
 }

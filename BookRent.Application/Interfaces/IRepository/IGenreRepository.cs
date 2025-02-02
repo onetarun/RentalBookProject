@@ -10,7 +10,7 @@ namespace BookRent.Application.Interfaces.IRepository
         public interface IGenreRepository : IGenericRepo<Genre>
         {
             bool IsExists(int id);
-            Task UpdateBookAsync(Genre genre);
+            Task UpdategenreAsync(Genre genre);
         }
  }
 
