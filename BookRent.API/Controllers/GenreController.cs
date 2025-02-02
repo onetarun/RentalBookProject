@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using BookRent.API.DTOs;
 using BookRent.Application.Interfaces.IRepository;
 using BookRent.Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -45,17 +46,26 @@ namespace BookRent.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateGenre(int id, [FromBody] Genre genre)
+        public async Task<IActionResult> UpdateGenre(int id, [FromBody] GenreDTO genreDto)
         {
-            if (id != genre.GenreID)
+            if (id != genreDto.GenreID)
             {
                 return BadRequest("Genre ID mismatch.");
             }
 
             try
             {
+                var genre = await _unitOfWork.Genre.GetByIdAsync(id);
+                if (genre == null)
+                {
+                    return NotFound($"Genre with ID {id} not found.");
+                }
+
+                // Map DTO to entity
+                genre.GenreCategory = genreDto.GenreCategory;
+                genre.GenreID = id;
                 await _unitOfWork.Genre.UpdategenreAsync(genre);
-                 
+
                 return Ok("Genre updated successfully.");
             }
             catch (Exception ex)
@@ -85,19 +95,25 @@ namespace BookRent.API.Controllers
             }
         }
         [HttpPost]
-        public IActionResult AddGenre([FromBody] Genre genre)
+        public async Task<IActionResult> AddGenre([FromBody] GenreDTO genreDto)
         {
-            if (genre == null)
+            if (genreDto == null)
             {
-                return BadRequest("Genre cannot be null.");
+                return BadRequest("Genre data is required.");
             }
 
             try
             {
-                   _unitOfWork.Genre.Add(genre);
-                return Ok("Genre updated successfully.");
-                //await _unitOfWork.SaveChangesAsync();
-                //return CreatedAtAction(nameof(GetAllGenresWithBooks), new { id = genre.GenreID }, genre);
+                var genre = new Genre
+                {
+                    GenreCategory = genreDto.GenreCategory
+
+                };
+
+                 _unitOfWork.Genre.Add(genre);
+
+
+                return Ok("Genre Added successfully.");
             }
             catch (Exception ex)
             {

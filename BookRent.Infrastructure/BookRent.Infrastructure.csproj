@@ -20,4 +20,7 @@
 	  <ProjectReference Include="..\BookRent.Application\BookRent.Application.csproj" />
 	  <ProjectReference Include="..\BookRent.Domain\BookRent.Domain.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
+	</ItemGroup>
 </Project>
