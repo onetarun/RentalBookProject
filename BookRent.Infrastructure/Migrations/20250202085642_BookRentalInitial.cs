@@ -5,7 +5,7 @@
 namespace BookRent.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class QuizeDBInitial : Migration
+    public partial class BookRentalInitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

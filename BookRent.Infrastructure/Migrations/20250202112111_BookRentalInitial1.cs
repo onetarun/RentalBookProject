@@ -6,20 +6,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookRent.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class BookDBInitial2 : Migration
+    public partial class BookRentalInitial1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Books");
-
-            migrationBuilder.DropTable(
-                name: "Genres");
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "Genres",
@@ -27,8 +17,8 @@ namespace BookRent.Infrastructure.Migrations
                 {
                     GenreID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GenreCategory = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    GenreCategory = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,22 +31,22 @@ namespace BookRent.Infrastructure.Migrations
                 {
                     BookID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GenreID = table.Column<int>(type: "int", nullable: false),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Availability = table.Column<bool>(type: "bit", nullable: false),
-                    BookDimensions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BookImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ISBN = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    PublicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PublisherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BookImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Availability = table.Column<bool>(type: "bit", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    GenreID = table.Column<int>(type: "int", nullable: false),
+                    PublisherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PublicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalPages = table.Column<int>(type: "int", nullable: false),
-                    isdeleted = table.Column<int>(type: "int", nullable: false)
+                    BookDimensions = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isdeleted = table.Column<int>(type: "int", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,6 +63,16 @@ namespace BookRent.Infrastructure.Migrations
                 name: "IX_Books_GenreID",
                 table: "Books",
                 column: "GenreID");
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "Genres");
         }
     }
 }

@@ -2,6 +2,7 @@
 
 using BookRent.Application.Interfaces.IRepository;
 using BookRent.Infrastructure.Data;
+using BookRent.Infrastructure.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookRentAPI
@@ -22,6 +23,7 @@ namespace BookRentAPI
              options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<IApplicationdbContext, ApplicationDbContext>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
