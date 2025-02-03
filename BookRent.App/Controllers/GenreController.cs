@@ -116,7 +116,7 @@ namespace BookRent.App.Controllers
                 var json = JsonConvert.SerializeObject(genres);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage responseMsg = await _httpClient.PutAsync("api/Genre", content);
+                HttpResponseMessage responseMsg = await _httpClient.PutAsync($"api/Genre/{genre.GenreID}", content);
 
                 if (responseMsg.IsSuccessStatusCode)
                 {
