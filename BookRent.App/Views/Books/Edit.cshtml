@@ -1,0 +1,93 @@
+﻿@using BookRent.App.ViewModels
+@model VMBook
+@{
+	ViewData["Title"] = "Create";
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div class="container mt-3 form-control">
+	<h3> Create Book</h3>
+	<hr />
+	<form method="post" asp-action="Create">
+		<input type="hidden" asp-for="BookID" />
+		<div class="row">
+			<div class="mb-3 col-6">
+				<label for="ISBN" class="form-label">ISBN</label>
+				<input asp-for="ISBN" class="form-control-sm" />
+			</div>
+			<div class="mb-3 col-6">
+				<label for="Price" class="form-label">Price</label>
+				<input asp-for="Price" class="form-control-sm" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="mb-3 col-6">
+				<label for="Title" class="form-label">Title</label>
+				<input asp-for="Title" class="form-control-sm" />
+			</div>
+			<div class="mb-3 col-6">
+				<label for="Created" class="form-label">Created</label>
+				<input asp-for="Created" class="form-control-sm" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="mb-3 col-6">
+				<label for="Author" class="form-label">Author</label>
+				<input asp-for="Author" class="form-control-sm" />
+			</div>
+			<div class="mb-3 col-6">
+				<label for="GenreID" class="form-label">Genre</label>
+				<select asp-for="GenreID" class="form-select-sm">
+					<option value="">Select Genre</option>
+					@foreach (var @item in Model.Genres)
+					{
+						<option value="@item.GenreID">@item.GenreCategory</option>
+					}
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="mb-3 col-6">
+				<label for="Description" class="form-label">Description</label>
+				<input asp-for="Description" class="form-control-sm" />
+			</div>
+			<div class="mb-3 col-6">
+				<label for="PublisherName" class="form-label">PublisherName</label>
+				<input asp-for="PublisherName" class="form-control-sm" />
+			</div>
+			<div class="mb-3 col-6">
+				<label for="PublicationDate" class="form-label">PublicationDate</label>
+				<input asp-for="PublicationDate" class="form-control-sm" />
+			</div>
+			<div class="mb-3 col-6">
+				<label for="TotalPages" class="form-label">Pages</label>
+				<input asp-for="TotalPages" class="form-control-sm" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="mb-3 col-6">
+				<label for="BookImagePath" class="form-label">BookImagePath</label>
+				<input asp-for="BookImagePath" class="form-control-sm" />
+			</div>
+			<div class="mb-3 col-6">
+				<label for="BookDimensions" class="form-label">BookDimensions</label>
+				<input asp-for="BookDimensions" class="form-control-sm" />
+			</div>
+		</div>
+		<div class="row-cols-8">
+			<label for="Availability" class="form-label">Availability</label>
+			<select asp-for="Availability" class="form-select-sm">
+				<option value="Yes" selected>Yes</option>
+				<option value="No">No</option>
+			</select>
+		</div>
+
+		<div class="mb-3 text-center">
+			<button type="submit" value="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</form>
+</div>

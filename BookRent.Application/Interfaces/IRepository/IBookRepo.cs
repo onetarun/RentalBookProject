@@ -10,7 +10,8 @@ namespace BookRent.Application.Interfaces.IRepository
 {
     public interface IBookRepo :  IGenericRepo<Book>
     {
-
+        
+            Task<IEnumerable<Book>> GetALLBooksWithGenre();
         Task<IEnumerable<Book>> GetBooksByAuthorAsync(string author);
         Task<IEnumerable<Book>> GetBooksByGenreAsync(int genreId);
 

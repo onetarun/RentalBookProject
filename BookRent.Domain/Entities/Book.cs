@@ -15,29 +15,17 @@ namespace BookRent.Domain.Entities
         public string Description { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime LastUpdated { get; set; }= DateTime.Now;
-
         public string BookImagePath { get; set; }
-
         public bool Availability { get; set; }
-
         public double Price { get; set; }
         public int GenreID { get; set; }
-        public Genre Genre { get; set; }
-
-       
+        public Genre Genre { get; set; }       
         public string PublisherName { get; set; }
-
-        public DateTime PublicationDate { get; set; } = DateTime.Now;
-        
-        
-
+        public DateTime PublicationDate { get; set; } = DateTime.Now;  
         public int TotalPages { get; set; }
-
         public string BookDimensions { get; set; }
-
         public int isdeleted { get; set; }
-
-        public DateTime DeletedOn { get; set; } = DateTime.Now;
+        public DateTime DeletedOn { get; set; } = DateTime.Now; 
 
     }
 }

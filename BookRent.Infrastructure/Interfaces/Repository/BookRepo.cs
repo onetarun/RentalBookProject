@@ -21,7 +21,10 @@ namespace BookRent.Infrastructure.Interfaces.Repository
         }
 
 
-
+        public async Task<IEnumerable<Book>> GetALLBooksWithGenre()
+        { 
+            return await _context.Set<Book>().Include(x=>x.Genre).ToListAsync(); 
+        }
         public async Task<IEnumerable<Book>> GetBooksByAuthorAsync(string author)
         {
             return await _context.Set<Book>().Where(b => b.Author == author).ToListAsync();

@@ -21,6 +21,6 @@ namespace BookRent.API.DTOs
         public DateTime PublicationDate { get; set; }
         public int TotalPages { get; set; }
         public string BookDimensions { get; set; }
-        public List<GenreDTO> Genres { get; set; } = new();
+        //public List<GenreDTO> Genres { get; set; } = new();
     }
 }

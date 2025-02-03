@@ -59,8 +59,6 @@ namespace BookRent.App.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(VMGenre genres)
         {
-            
-
             using (HttpClient client = new HttpClient())
             {
                 var json = JsonConvert.SerializeObject(genres);
