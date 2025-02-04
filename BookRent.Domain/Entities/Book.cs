@@ -10,7 +10,7 @@ namespace BookRent.Domain.Entities
     public class Book
     {
 
-        //Create Primary Key
+        //Create Primary Key , Update Primary Key
 
         public int BookID { get; set; }
         public string ISBN { get; set; }
