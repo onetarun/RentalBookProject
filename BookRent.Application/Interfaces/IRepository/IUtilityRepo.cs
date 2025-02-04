@@ -12,6 +12,9 @@ namespace BookRent.Application.Interfaces.IRepository
         Task<string> SaveImage(Book book);
         Task DeleteImage(Book book);
         Task<string> EditImage(Book book);
+        //Update Image
+
+
         //testing phase
     }
 }
