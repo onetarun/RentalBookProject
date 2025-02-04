@@ -18,6 +18,7 @@ namespace BookRent.Domain.Entities
         public int BookId { get; set; }
         //not isbn
          //isbn
+         //ok
         public string ISBN { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
