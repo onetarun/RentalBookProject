@@ -11,7 +11,7 @@ namespace BookRent.Domain.Entities
     {
 
 
-        //Create Primary Key , Update Primary Key
+        //Create Primary Key , Update Primary Key Update
         [Key]
        
 
