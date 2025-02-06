@@ -1,4 +1,5 @@
-﻿using BookRent.App.ViewModels;
+﻿using AutoMapper;
+using BookRent.App.ViewModels;
 using BookRent.Application.Interfaces.IRepository;
 using BookRent.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -15,17 +16,13 @@ namespace BookRent.App.Controllers
     {
 
         private readonly HttpClient _httpClient;
-        //private readonly IUnitOfWork _unitOfWork;
 
-        //public GenreController(IUnitOfWork unitOfWork, IHttpClientFactory httpClient)
-        //{
-        //    _unitOfWork = unitOfWork;
-        //    _httpClient = httpClient.CreateClient("MyAPIClient");
-        //}       
+        private IMapper _mapper;
 
-        public GenreController(IHttpClientFactory httpClient)
+        public GenreController(IHttpClientFactory httpClient, IMapper mapper)
         {
             _httpClient = httpClient.CreateClient("MyAPIClient");
+            _mapper = mapper;
         }
 
         //[Authorize]
@@ -33,7 +30,7 @@ namespace BookRent.App.Controllers
         public async Task<IActionResult> Index()
         {
 
-            List<VMGenre> genreViewModels = new List<VMGenre>();
+            List<VMGenre> genrevm = new List<VMGenre>();
             var genres = new List<Genre>();
             var response = await _httpClient.GetAsync("api/Genre");
 
@@ -41,7 +38,10 @@ namespace BookRent.App.Controllers
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
                 genres = JsonConvert.DeserializeObject<List<Genre>>(jsonString);
-                genreViewModels=genres.Select(g => new VMGenre { GenreID = g.GenreID, GenreCategory = g.GenreCategory }).ToList();
+
+                genrevm = _mapper.Map(genres,genrevm);
+
+               // genreViewModels =genres.Select(g => new VMGenre { GenreId = g.GenreID, Title = g.Title }).ToList();
 
             }
             else
@@ -49,7 +49,7 @@ namespace BookRent.App.Controllers
                 ViewBag.Error = "Unable to fetch genres.";
             }           
                  
-            return View(genreViewModels);
+            return View(genrevm);
         }
         [HttpGet]
         public IActionResult Create()
@@ -91,32 +91,32 @@ namespace BookRent.App.Controllers
             {
                 ViewBag.Error = "Unable to fetch genres.";
             }
-            VMGenre viewModel = new VMGenre
-            {
-                GenreID = genres.GenreID,
-                GenreCategory = genres.GenreCategory
-            };
+            VMGenre viewModel = new VMGenre();
+            viewModel = _mapper.Map(genres,viewModel);
+             
             return View(viewModel);
 
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(VMGenre genre)
+        public async Task<IActionResult> Edit(VMGenre genrevm)
         {
             var genres = new Genre();
-            var response = await _httpClient.GetAsync($"api/Genre/{genre.GenreID}");
+            var response = await _httpClient.GetAsync($"api/Genre/{genrevm.GenreId}");
 
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
                 genres = JsonConvert.DeserializeObject<Genre>(jsonString);
-                genres.GenreCategory = genre.GenreCategory;
+                //genres.Title = genrevm.Title;
+
+                genrevm = _mapper.Map(genres, genrevm);
             }
             using (HttpClient client = new HttpClient())
             {
                 var json = JsonConvert.SerializeObject(genres);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage responseMsg = await _httpClient.PutAsync($"api/Genre/{genre.GenreID}", content);
+                HttpResponseMessage responseMsg = await _httpClient.PutAsync($"api/Genre/{genrevm.GenreId}", content);
 
                 if (responseMsg.IsSuccessStatusCode)
                 {

@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Options;
 using BookRent.App.Common;
+using BookRent.API.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,12 @@ builder.Services.AddHttpClient("MyAPIClient", (serviceProvider, client) =>
     client.BaseAddress = new Uri(appSettings.BaseAddress);
 });
 
+var config = new AutoMapper.MapperConfiguration(options =>
+{
+    options.AddProfile(new AutomapperProfile());
+});
+var mapper = config.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 

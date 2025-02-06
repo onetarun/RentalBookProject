@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace BookRent.Domain.Entities
 {
-    public class Genre
+    public class Authors
     {
-
-        public int GenreID { get; set; }
-        public string Title { get; set; } 
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -2,8 +2,7 @@
 {
     public class VMGenre
     {
-        public int GenreID { get; set; }
-        public string GenreCategory { get; set; }
-       // public DateTime Created { get; set; }
+        public int GenreId { get; set; }
+        public string Title { get; set; } 
     }
 }

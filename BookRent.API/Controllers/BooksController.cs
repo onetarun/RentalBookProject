@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Net;
+using AutoMapper;
 using BookRent.API.DTOs;
 using BookRent.Application.Interfaces.IRepository;
 using BookRent.Domain.Entities;
@@ -15,10 +16,13 @@ namespace BookRent.API.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        public BooksController(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public BooksController(IUnitOfWork unitOfWork,IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllBooks([FromQuery] string? filter = null)
         {
@@ -41,7 +45,8 @@ namespace BookRent.API.Controllers
                 return NotFound("No genres found.");
             }
 
-            return Ok(books);
+            var bookDto = _mapper.Map<List<BookDTO>>(books);
+            return Ok(bookDto);
         }
         [HttpGet("GetAllBooksWithGenre")]
         public async Task<IActionResult> GetAllBooksWithGenre([FromQuery] string? filter = null)
@@ -65,7 +70,8 @@ namespace BookRent.API.Controllers
                 return NotFound("No genres found.");
             }
 
-            return Ok(books);
+            var bookDto = _mapper.Map<List<BookDTO>>(books);
+            return Ok(bookDto);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -78,8 +84,8 @@ namespace BookRent.API.Controllers
                 {
                     return NotFound($"Book with ID {id} not found.");
                 }
-
-                return Ok(book);
+                var bookDto = _mapper.Map<List<BookDTO>>(book);
+                return Ok(bookDto); 
             }
             catch (Exception ex)
             {
@@ -89,7 +95,7 @@ namespace BookRent.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> EditBook(int id, [FromBody] BookDTO dto)
         {
-            if (id != dto.BookID)
+            if (id != dto.BookId)
             {
                 return BadRequest("Book ID mismatch.");
             }
@@ -101,21 +107,9 @@ namespace BookRent.API.Controllers
                 {
                     return NotFound($"Book with ID {id} not found.");
                 }
-
+                
                 // Map DTO to entity
-                book.BookID = dto.BookID;
-                book.ISBN = dto.ISBN;
-                book.Title = dto.Title;
-                book.Author = dto.Author;
-                book.Description = dto.Description;
-                book.BookImagePath = dto.BookImagePath;
-                book.Availability = dto.Availability;
-                book.Price = dto.Price;
-                book.GenreID = dto.GenreID;
-                book.PublisherName = dto.PublisherName;
-                book.PublicationDate = dto.PublicationDate;
-                book.TotalPages = dto.TotalPages;
-                book.BookDimensions = dto.BookDimensions;
+                book = _mapper.Map(dto, book);
 
                 await _unitOfWork.Book.UpdateBookAsync(book);
 
@@ -136,23 +130,9 @@ namespace BookRent.API.Controllers
 
             try
             {
-                var book = new Book
-                {
-                    BookID = dto.BookID,
-                    ISBN = dto.ISBN,
-                    Title = dto.Title,
-                    Author = dto.Author,
-                    Description = dto.Description,
-                    BookImagePath = dto.BookImagePath,
-                    Availability = dto.Availability,
-                    Price = dto.Price,
-                    GenreID = dto.GenreID,
-                    PublisherName = dto.PublisherName,
-                    PublicationDate = dto.PublicationDate,
-                    TotalPages = dto.TotalPages,
-                    BookDimensions = dto.BookDimensions
+                Book book = new Book();
 
-                };
+                book = _mapper.Map(dto, book);
 
                 _unitOfWork.Book.Add(book); 
 

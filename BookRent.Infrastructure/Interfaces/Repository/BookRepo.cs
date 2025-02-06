@@ -32,7 +32,7 @@ namespace BookRent.Infrastructure.Interfaces.Repository
 
         public async Task<IEnumerable<Book>> GetBooksByGenreAsync(int genreId)
         {
-            return await _context.Set<Book>().Where(b => b.GenreID == genreId).ToListAsync();
+            return await _context.Set<Book>().Where(b => b.GenreId == genreId).ToListAsync();
         }
 
         public async Task UpdateBookAsync(Book book)

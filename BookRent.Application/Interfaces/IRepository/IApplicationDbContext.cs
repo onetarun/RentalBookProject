@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookRent.Application.Interfaces.IRepository
 {
-    public interface IApplicationdbContext
+    public interface IApplicationDbContext
     {
         DbSet<Book> Books { get; }
         DbSet<Genre> Genres { get; }

@@ -25,18 +25,18 @@
         {
             <tr>
                 <td>
-                    @item.GenreID
+                    @item.GenreId
                 </td>
                 <td>
-                    @item.GenreCategory
+                    @item.Title
                 </td>
                @*  <td>
                     @item.Description
                 </td> *@
                 
                 <td>
-                    <a class="btn btn-info" asp-action="Edit" asp-controller="Genre" asp-route-id="@item.GenreID">Edit</a>
-                    <a class="btn btn-info" asp-action="Delete" asp-controller="Genre" asp-route-id="@item.GenreID">Delete</a>
+                    <a class="btn btn-info" asp-action="Edit" asp-controller="Genre" asp-route-id="@item.GenreId">Edit</a>
+                    <a class="btn btn-info" asp-action="Delete" asp-controller="Genre" asp-route-id="@item.GenreId">Delete</a>
                 </td>
             </tr>
         }
