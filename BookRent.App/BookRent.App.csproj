@@ -10,6 +10,7 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 	<ItemGroup>
+	  <PackageReference Include="AutoMapper" Version="13.0.1" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.12">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

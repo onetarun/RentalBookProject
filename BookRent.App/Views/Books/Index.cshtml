@@ -37,7 +37,7 @@
                     @item.Title
                 </td>
                  <td>
-                    @item.Availability
+                    @item.IsAvailable
                 </td>
                 <td>
                     @item.Price
@@ -46,8 +46,8 @@
                     @item.GenreName
                 </td>
                 <td>
-                    <a class="btn btn-info" asp-action="Edit" asp-controller="Books" asp-route-id="@item.BookID">Edit</a>
-                    <a class="btn btn-info" asp-action="Delete" asp-controller="Books" asp-route-id="@item.BookID">Delete</a>
+                    <a class="btn btn-info" asp-action="Edit" asp-controller="Books" asp-route-id="@item.BookId">Edit</a>
+                    <a class="btn btn-info" asp-action="Delete" asp-controller="Books" asp-route-id="@item.BookId">Delete</a>
                 </td>
             </tr>
         }

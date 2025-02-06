@@ -1,5 +1,6 @@
 
 
+using BookRent.API.Mapper;
 using BookRent.Application.Interfaces.IRepository;
 using BookRent.Infrastructure.Data;
 using BookRent.Infrastructure.Interfaces.Repository;
@@ -19,10 +20,18 @@ namespace BookRentAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
              options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddScoped<IApplicationdbContext, ApplicationDbContext>();
+            var config = new AutoMapper.MapperConfiguration(options =>
+            {
+                options.AddProfile(new AutomapperProfile());
+            });
+            var mapper = config.CreateMapper();
+            builder.Services.AddSingleton(mapper);
+
+            builder.Services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();

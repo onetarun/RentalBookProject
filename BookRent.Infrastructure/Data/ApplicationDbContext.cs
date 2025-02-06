@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BookRent.Infrastructure.Data
 {
-    public class ApplicationDbContext : DbContext,IApplicationdbContext
+    public class ApplicationDbContext : DbContext,IApplicationDbContext
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

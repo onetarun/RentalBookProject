@@ -9,7 +9,7 @@ namespace BookRent.API.DTOs
     public class GenreDTO
     {
         public int GenreID { get; set; }
-        public string GenreCategory { get; set; }
+        public string Title { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using AutoMapper;
 using BookRent.API.DTOs;
 using BookRent.Application.Interfaces.IRepository;
 using BookRent.Domain.Entities;
@@ -15,11 +16,12 @@ namespace BookRent.API.Controllers
     {
 
         private readonly IUnitOfWork _unitOfWork;
-        // unit of
+        private IMapper _mapper;
 
-        public GenreController(IUnitOfWork unitOfWork)
+        public GenreController(IUnitOfWork unitOfWork,IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -29,7 +31,7 @@ namespace BookRent.API.Controllers
             Expression<Func<Genre, bool>>? predicate = null;
             if (!string.IsNullOrEmpty(filter))
             {
-                predicate = g => g.GenreCategory.Contains(filter);
+                predicate = g => g.Title.Contains(filter);
             }
 
             // No include in this example, but you can pass one if needed
@@ -43,7 +45,8 @@ namespace BookRent.API.Controllers
                 return NotFound("No genres found.");
             }
 
-            return Ok(genres);
+            var genreDto=_mapper.Map<List<GenreDTO>>(genres);
+            return Ok(genreDto);
         }
 
         [HttpPut("{id}")]
@@ -62,9 +65,8 @@ namespace BookRent.API.Controllers
                     return NotFound($"Genre with ID {id} not found.");
                 }
 
-                // Map DTO to entity
-                genre.GenreCategory = genreDto.GenreCategory;
-                genre.GenreID = id;
+                genre = _mapper.Map(genreDto, genre);
+
                 await _unitOfWork.Genre.UpdategenreAsync(genre);
 
                 return Ok("Genre updated successfully.");
@@ -105,14 +107,11 @@ namespace BookRent.API.Controllers
 
             try
             {
-                var genre = new Genre
-                {
-                    GenreCategory = genreDto.GenreCategory
+                Genre genre = new Genre();
 
-                };
+                genre = _mapper.Map(genreDto, genre);
 
-                 _unitOfWork.Genre.Add(genre);
-
+                _unitOfWork.Genre.Add(genre);
 
                 return Ok("Genre Added successfully.");
             }
@@ -133,8 +132,8 @@ namespace BookRent.API.Controllers
                 {
                     return NotFound($"Genre with ID {id} not found.");
                 }
-
-                return Ok(genre);
+                var genreDto = _mapper.Map<List<GenreDTO>>(genre);
+                return Ok(genreDto);
             }
             catch (Exception ex)
             {
