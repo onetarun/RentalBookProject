@@ -7,17 +7,19 @@ using BookRent.Application.Interfaces.IRepository;
 using BookRent.Domain.Entities;
 using BookRent.Infrastructure.Data;
 using BookRent.Infrastructure.Interfaces.Repository;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace BookRent.Infrastructure.Interfaces.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
-
         public IBookRepo Book { get; private set; }
 
         public IGenreRepository  Genre{ get; private set; }
-
+        public IUtilityRepo utility { get; private set; }
+          
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;

@@ -2,6 +2,7 @@
 using System.Text;
 using AutoMapper;
 using BookRent.App.ViewModels;
+using BookRent.Application.Interfaces.IRepository;
 using BookRent.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -11,11 +12,13 @@ namespace BookRent.App.Controllers
     public class BooksController : Controller
     {
         private readonly HttpClient _httpClient;
+        private readonly IUtilityRepo _utility;
         private IMapper _mapper;
-        public BooksController(IHttpClientFactory httpClient, IMapper mapper)
+        public BooksController(IHttpClientFactory httpClient, IMapper mapper, IUtilityRepo utility)
         {
             _httpClient = httpClient.CreateClient("MyAPIClient");
             _mapper = mapper;
+            _utility = utility;
         }
 
         [HttpGet]
@@ -24,26 +27,16 @@ namespace BookRent.App.Controllers
 
             List<VMBookList> vm = new List<VMBookList>();
             
-            var books = new List<Book>();
+            var books = new List<VMBookList>();
 
             var response = await _httpClient.GetAsync("api/Books/GetAllBooksWithGenre");
 
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
-                books = JsonConvert.DeserializeObject<List<Book>>(jsonString);
+                vm = JsonConvert.DeserializeObject<List<VMBookList>>(jsonString);
 
-                vm=_mapper.Map(books,vm);
-
-                //vm = books.Select(g => new VMBookList 
-                //{ BookId = g.BookId,
-                //ISBN = g.ISBN,
-                //Title = g.Title, 
-                //IsAvailable = g.IsAvailable,
-                //Price = g.Price,
-                //GenreName = g.Genre.Title
-                
-                //}).ToList();
+                //vm=_mapper.Map(books,vm);
             }
             else
             {
@@ -66,21 +59,34 @@ namespace BookRent.App.Controllers
                 var jsonString = await response.Content.ReadAsStringAsync();
                 genre = JsonConvert.DeserializeObject<List<Genre>>(jsonString);
 
-                vm.Genres=_mapper.Map(genre,vm.Genres);
+                vm.Genre=_mapper.Map(genre,vm.Genre);
 
-                //vm.Genres = genre.Select(g => new VMGenre { GenreId = g.GenreID, Title = g.Title }).ToList();
             }
             return View(vm);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(VMBook book)
+        public async Task<IActionResult> Create(VMBook vm)
         {
+            if (vm.BookImage != null)
+            {
+                vm.BookUrl = await _utility.SaveImage(vm.BookImage);
+            }
+            var genres = new VMGenre();
+            var response1 = await _httpClient.GetAsync($"api/Genre/{vm.GenreId}");
+
+            if (response1.IsSuccessStatusCode)
+            {
+                var jsonString = await response1.Content.ReadAsStringAsync();
+                genres = JsonConvert.DeserializeObject<VMGenre>(jsonString); 
+            } 
+
+            vm.Genre=new List<VMGenre> { genres };
+
             using (HttpClient client = new HttpClient())
             {
-                book.BookUrl = "abc";
-                var json = JsonConvert.SerializeObject(book);
+                var json = JsonConvert.SerializeObject(vm);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await _httpClient.PostAsync("api/Books", content);
+                HttpResponseMessage response = await _httpClient.PostAsync("api/Books/AddBook", content);
                 if (response.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");
@@ -93,72 +99,58 @@ namespace BookRent.App.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var book = new Book();
-            var response = await _httpClient.GetAsync($"api/Books/{Id}");
-            VMBook vm = new VMBook();
+            List<Genre> genrevm = new List<Genre>();
+            
+            VMBook vm = new VMBook(); 
 
+            var response = await _httpClient.GetAsync($"api/Books/{Id}");
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
-                book = JsonConvert.DeserializeObject<Book>(jsonString);
+                vm = JsonConvert.DeserializeObject<VMBook>(jsonString); 
 
-                vm = _mapper.Map(book, vm);
+                var GenreResponse = await _httpClient.GetAsync("api/Genre");
+                if (GenreResponse.IsSuccessStatusCode)
+                {
+                    var jsonString1 = await GenreResponse.Content.ReadAsStringAsync();
+                    genrevm = JsonConvert.DeserializeObject<List<Genre>>(jsonString1);
+
+                    vm.Genre = _mapper.Map(genrevm, vm.Genre); 
+                }
             }
             else
             {
                 ViewBag.Error = "Unable to fetch Book.";
             }
-            //VMBook vm = new VMBook
-            //{
-            //        BookId = book.BookId,
-            //        ISBN = book.ISBN,
-            //        Title = book.Title,
-            //        Author = book.Author,
-            //        Description = book.Description,
-            //        BookImagePath = book.BookUrl,
-            //        Availability = book.IsAvailable,
-            //        Price = book.Price,
-            //        GenreId = book.GenreId,
-            //        PublisherName = book.PublisherName,
-            //        PublicationDate = book.PublicationDate,
-            //        TotalPages = book.TotalPages,
-            //        BookDimensions = book.BookDimensions
-            //};
+
             return View(vm);
 
         }
         [HttpPost]
         public async Task<IActionResult> Edit(VMBook vm)
         {
-            var books = new Book();
+            if (vm.BookImage != null)
+            {
+                vm.BookUrl = await _utility.EditImage(vm.BookUrl, vm.BookImage);
+            }
+
+            var books = new VMBook();
             var response = await _httpClient.GetAsync($"api/Books/{vm.BookId}");
 
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
-                books = JsonConvert.DeserializeObject<Book>(jsonString);
+                books = JsonConvert.DeserializeObject<VMBook>(jsonString);
 
-                books = _mapper.Map(vm,books);
+                //books = _mapper.Map(vm,books);
 
-                //books.BookId = vm.BookId;
-                //books.ISBN = vm.ISBN;
-                //books.Title = vm.Title;
-                //books.Author = vm.Author;
-                //books.Description = vm.Description;
-                //books.BookUrl = vm.BookImagePath;
-                //books.IsAvailable = vm.Availability;
-                //books.Price = vm.Price;
-                //books.GenreId = vm.GenreId;
-                //books.PublisherName = vm.PublisherName;
-                //books.PublicationDate = vm.PublicationDate;
-                //books.TotalPages = vm.TotalPages;
-                //books.BookDimensions = vm.BookDimensions;
             }
             using (HttpClient client = new HttpClient())
             {
-                var json = JsonConvert.SerializeObject(books);
+                var json = JsonConvert.SerializeObject(vm);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage responseMsg = await _httpClient.PutAsync("api/books", content);
+                HttpResponseMessage responseMsg = await _httpClient.PutAsync($"api/books/{vm.BookId}", content);
 
                 if (responseMsg.IsSuccessStatusCode)
                 {

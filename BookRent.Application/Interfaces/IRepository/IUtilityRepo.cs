@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookRent.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace BookRent.Application.Interfaces.IRepository
 {
     public interface IUtilityRepo
     { 
-        Task<string> SaveImage(Book book);
-        Task DeleteImage(Book book);
-        Task<string> EditImage(Book book);
+        Task<string> SaveImage(IFormFile bookImage);
+        Task DeleteImage(string bookUrl);
+        Task<string> EditImage(string bookUrl, IFormFile bookImage);
         //Update Image
-
+        Task<string> GetFileName(string bookUrl);
 
         //testing phase
     }

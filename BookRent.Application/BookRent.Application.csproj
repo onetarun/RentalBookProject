@@ -13,6 +13,5 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\BookRent.Domain\BookRent.Domain.csproj" />
-	  
 	</ItemGroup>
 </Project>

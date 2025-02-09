@@ -11,10 +11,17 @@ namespace BookRent.API.Mapper
             CreateMap<VMGenre, Genre>();
             CreateMap<Genre, VMGenre>();
 
-            CreateMap<VMBook, Book>();
-            CreateMap<Book, VMBook>();
+            CreateMap<VMBook, Book>()
+                .ForMember(dest => dest.Genre, opt => opt.MapFrom(MapToGenre));
+                //.ForMember(dest => dest.Genre, opt => opt.Ignore());
 
-            CreateMap<Book,VMBookList>();
+            CreateMap<Book, VMBook>()
+                .ForMember(dest => dest.Genre, opt => opt.MapFrom(MapToVMGenre))
+                .ForMember(dest => dest.BookImage, opt => opt.Ignore());
+
+
+            CreateMap<Book,VMBookList>()
+                .ForMember(dest => dest.GenreName, opt=>opt.MapFrom(opt=> opt.Genre.Title));
 
             CreateMap<VMBookList,Book>()
             .ForMember(dest => dest.BookDimensions, opt=>opt.Ignore())
@@ -27,6 +34,33 @@ namespace BookRent.API.Mapper
             .ForMember(dest => dest.PublicationDate, opt => opt.Ignore())
             .ForMember(dest => dest.TotalPages, opt => opt.Ignore());
 
+        }
+
+        public Genre MapToGenre(VMBook vm, Book book)
+        {
+            Genre genrelist = new Genre();
+            if (vm.Genre != null)
+            {
+                genrelist.GenreID = vm.Genre[0].GenreId;
+                genrelist.Title = vm.Genre[0].Title;
+            }
+            return genrelist;
+        }
+        //public List<VMGenre> MapToVMGenre(Book book, VMBook vm)
+        //{
+        //    List<VMGenre> vmlist = new List<VMGenre>
+        //    {
+        //        new VMGenre { GenreId = vm.Genres[0].GenreId, Title = vm.Genres[0].Title }
+        //    }; 
+        //    return vmlist;
+        //}
+        public List<VMGenre> MapToVMGenre(Book book, VMBook vm)
+        {
+            List<VMGenre> vmlist = new List<VMGenre>();
+            
+            vmlist.Add( new VMGenre { GenreId=book.GenreId, Title=book.Title });
+             
+            return vmlist;
         }
     }
 }

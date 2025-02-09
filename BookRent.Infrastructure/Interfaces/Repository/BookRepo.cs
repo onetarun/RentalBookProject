@@ -35,6 +35,11 @@ namespace BookRent.Infrastructure.Interfaces.Repository
             return await _context.Set<Book>().Where(b => b.GenreId == genreId).ToListAsync();
         }
 
+        public async Task<Book> GetByIDWithGenre(int bookid)
+        {
+            return await _context.Set<Book>().Include(x => x.Genre).FirstOrDefaultAsync(x => x.BookId == bookid);
+        }
+
         public async Task UpdateBookAsync(Book book)
         {
             _context.Set<Book>().Update(book);

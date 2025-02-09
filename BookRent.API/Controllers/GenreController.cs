@@ -132,7 +132,7 @@ namespace BookRent.API.Controllers
                 {
                     return NotFound($"Genre with ID {id} not found.");
                 }
-                var genreDto = _mapper.Map<List<GenreDTO>>(genre);
+                var genreDto = _mapper.Map<GenreDTO>(genre);
                 return Ok(genreDto);
             }
             catch (Exception ex)
