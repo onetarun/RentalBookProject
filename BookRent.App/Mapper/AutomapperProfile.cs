@@ -14,6 +14,9 @@ namespace BookRent.API.Mapper
             CreateMap<VMBook, Book>();
             CreateMap<Book, VMBook>();
 
+            CreateMap<VMUserRegisteration, UserRegisteration>();
+            CreateMap<UserRegisteration, VMUserRegisteration>();
+
             CreateMap<Book,VMBookList>();
 
             CreateMap<VMBookList,Book>()

@@ -24,7 +24,7 @@ namespace BookRent.Infrastructure.Data
         public DbSet<Book> Books { get; set; }
 
         public DbSet<Genre> Genres {  get; set; }
-
+        public DbSet<UserRegisteration> Users { get; set; }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             return await base.SaveChangesAsync(cancellationToken);

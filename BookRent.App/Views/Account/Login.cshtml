@@ -1,0 +1,30 @@
+﻿
+@using BookRent.App.ViewModels
+@model VMUserRegisteration
+@{
+    ViewData["Title"] = "Login";
+}
+<h2 class="text-center">Login</h2>
+<form asp-action="Login" method="post" class="container mt-4 w-50">
+    <div class="mb-3">
+        <label class="form-label">Email:</label>
+        <input asp-for="Email" type="email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password:</label>
+        <input asp-for="PasswordHash" type="password" class="form-control" required minlength="6" />
+        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success w-100">Login</button>
+</form>
+<script>
+    document.querySelector("form").addEventListener("submit", function(e) {
+        let password = document.querySelector("[name='PasswordHash']").value;
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long.");
+            e.preventDefault();
+        }
+    });
+</script>
+

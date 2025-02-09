@@ -13,7 +13,7 @@ namespace BookRent.Application.Interfaces.IRepository
         IBookRepo Book { get; }
         IGenreRepository Genre { get; }
 
-
+        IUserService UserService { get; }
 
     }
 }

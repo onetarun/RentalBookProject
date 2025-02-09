@@ -11,6 +11,9 @@ namespace BookRent.API.Mapper
             CreateMap<GenreDTO, Genre>();
             CreateMap<Genre, GenreDTO>();
 
+            CreateMap<UserRegisterationDTO, UserRegisteration>();
+            CreateMap<UserRegisteration, UserRegisterationDTO>();
+
             CreateMap<BookDTO, Book>();
             CreateMap<Book, BookDTO>();
                 //.ForMember(dest => dest.Genre, opt => opt.MapFrom(MapToGenreDTO));
