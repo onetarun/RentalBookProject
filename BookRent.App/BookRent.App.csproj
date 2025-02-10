@@ -11,7 +11,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="AutoMapper" Version="13.0.1" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.12">
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.12"> 
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
@@ -22,5 +22,8 @@
 	  <ProjectReference Include="..\BookRent.Application\BookRent.Application.csproj" />
 	  
 	  <ProjectReference Include="..\BookRent.Infrastructure\BookRent.Infrastructure.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="wwwroot\Image\" />
 	</ItemGroup>
 </Project>

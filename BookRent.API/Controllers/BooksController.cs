@@ -70,7 +70,7 @@ namespace BookRent.API.Controllers
                 return NotFound("No genres found.");
             }
 
-            var bookDto = _mapper.Map<List<BookDTO>>(books);
+            var bookDto = _mapper.Map<List<BookListDTO>>(books);
             return Ok(bookDto);
         }
         [HttpGet("{id}")]
@@ -78,13 +78,13 @@ namespace BookRent.API.Controllers
         {
             try
             {
-                var book = await _unitOfWork.Book.GetByIdAsync(id);
+                var book = await _unitOfWork.Book.GetByIDWithGenre(id);
 
                 if (book == null)
                 {
                     return NotFound($"Book with ID {id} not found.");
                 }
-                var bookDto = _mapper.Map<List<BookDTO>>(book);
+                var bookDto = _mapper.Map<BookDTO>(book);
                 return Ok(bookDto); 
             }
             catch (Exception ex)
@@ -120,12 +120,12 @@ namespace BookRent.API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-        [HttpPost]
-        public async Task<IActionResult> AddBook(BookDTO dto)
+        [HttpPost("AddBook")]
+        public IActionResult AddBook(BookDTO dto)
         {
             if (dto == null)
             {
-                return BadRequest("Book details are missing.");
+                return  BadRequest("Book details are missing.");
             }
 
             try

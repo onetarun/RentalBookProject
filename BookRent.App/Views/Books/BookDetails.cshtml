@@ -1,0 +1,36 @@
+﻿@using BookRent.App.ViewModels
+@model VMBookDetails
+
+<div class="container mt-3 form-control">
+	<div class="row">
+		<div class="col-3"> 
+					<img src="@Url.Content(@Model.BookUrl)" alt="Image" class="h-100 w-75" /> 
+		</div>
+		<div class="col-5">
+			<div class="row">
+				<div class="col-4">
+					<div class="cols-2">
+						<h3>@Model.Title</h3>
+					</div>
+					<div class="cols-2">
+						Author : @Model.Author
+						<br />
+						Description : @Model.Description
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-4">
+			Price : @Model.Price<br />
+			<div class="mb-3">
+				<button type="submit" value="submit" class="btn btn-primary">Create Rental</button>
+			</div>
+			Product Details : @Model.Description<br />
+			ISBN : @Model.ISBN<br />
+			Publisher : @Model.PublisherName<br />
+			Publication Date : @Model.PublicationDate.Date<br />
+			Pages : @Model.TotalPages
+		</div>
+	</div>
+
+</div>
