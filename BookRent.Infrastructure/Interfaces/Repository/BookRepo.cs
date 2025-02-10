@@ -20,7 +20,6 @@ namespace BookRent.Infrastructure.Interfaces.Repository
             _context = context;
         }
 
-
         public async Task<IEnumerable<Book>> GetALLBooksWithGenre()
         { 
             return await _context.Set<Book>().Include(x=>x.Genre).ToListAsync(); 
@@ -33,6 +32,11 @@ namespace BookRent.Infrastructure.Interfaces.Repository
         public async Task<IEnumerable<Book>> GetBooksByGenreAsync(int genreId)
         {
             return await _context.Set<Book>().Where(b => b.GenreId == genreId).ToListAsync();
+        }
+
+        public async Task<Book> GetByIDWithGenre(int bookid)
+        {
+            return await _context.Set<Book>().Include(x => x.Genre).FirstOrDefaultAsync(x => x.BookId == bookid);
         }
 
         public async Task UpdateBookAsync(Book book)

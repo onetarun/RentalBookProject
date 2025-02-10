@@ -1,0 +1,23 @@
+﻿@using BookRent.App.ViewModels
+@model List<VMBookGallery>
+
+
+<div class="container mt-3 form-control">
+	<h3> Book Gallery </h3> 
+	<hr />
+	<form method="post" asp-action="BookDetails">
+	<ul class="row" style="list-style-type:none">
+		@foreach (var item in Model)
+		{
+			<li class="col-md-2">
+				<img src="@Url.Content(item.BookUrl)" alt="Image" class="h-100 w-75" />
+				<br />
+					<a asp-action="BookDetails" asp-controller="Books" asp-route-id="@item.BookId">@item.Title</a>
+			</li>
+				
+					@* <a asp-action="Edit" asp-controller="Quiz" asp-route-id="@item.ID">Edit</a>
+					<a asp-action="Delete" asp-controller="Quiz" asp-route-id="@item.ID">Delete</a> *@
+		}
+	</ul>
+	</form>
+</div>
