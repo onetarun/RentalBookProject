@@ -32,8 +32,7 @@ namespace BookRent.API.Mapper
             .ForMember(dest => dest.Genre, opt => opt.Ignore())
             .ForMember(dest => dest.PublisherName, opt => opt.Ignore())
             .ForMember(dest => dest.PublicationDate, opt => opt.Ignore())
-            .ForMember(dest => dest.TotalPages, opt => opt.Ignore());
-
+            .ForMember(dest => dest.TotalPages, opt => opt.Ignore()); 
         }
 
         public Genre MapToGenre(VMBook vm, Book book)

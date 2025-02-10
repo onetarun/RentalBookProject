@@ -176,5 +176,49 @@ namespace BookRent.App.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public async Task<IActionResult> BookGallery()
+        {
+
+            List<VMBookGallery> vm = new List<VMBookGallery>();
+            var book = new List<Book>();
+
+            var response = await _httpClient.GetAsync("api/Books");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                vm = JsonConvert.DeserializeObject<List<VMBookGallery>>(jsonString);
+
+            }
+            else
+            {
+                ViewBag.Error = "Unable to fetch Books.";
+            }
+
+            return View(vm);
+        }
+
+        public async Task<IActionResult> BookDetails(int id)
+        {
+
+            VMBookDetails vm = new VMBookDetails();
+            var book = new List<Book>();
+
+            var response = await _httpClient.GetAsync($"api/Books/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                vm = JsonConvert.DeserializeObject<VMBookDetails>(jsonString);
+
+            }
+            else
+            {
+                ViewBag.Error = "Unable to fetch Books.";
+            }
+
+            return View(vm);
+        }
     }
 }

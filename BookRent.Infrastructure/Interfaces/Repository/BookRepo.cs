@@ -20,7 +20,6 @@ namespace BookRent.Infrastructure.Interfaces.Repository
             _context = context;
         }
 
-
         public async Task<IEnumerable<Book>> GetALLBooksWithGenre()
         { 
             return await _context.Set<Book>().Include(x=>x.Genre).ToListAsync(); 
