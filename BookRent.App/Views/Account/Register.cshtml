@@ -1,0 +1,33 @@
+﻿@using BookRent.App.ViewModels
+@model VMUserRegisteration
+@{
+    ViewData["Title"] = "Register";
+}
+<h2 class="text-center">Register</h2>
+<form asp-action="Register" method="post" class="container mt-4 w-50">
+    <div class="mb-3">
+        <label class="form-label">Name:</label>
+        <input asp-for="Name" class="form-control" required />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email:</label>
+        <input asp-for="Email" type="email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password:</label>
+        <input asp-for="PasswordHash" type="password" class="form-control" required minlength="6" />
+        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Register</button>
+</form>
+@* <script>
+    document.querySelector("form").addEventListener("submit", function(e) {
+        let email = document.querySelector("[name='Email']").value;
+        if (!email.includes(""@"")) {
+            alert("Please enter a valid email address.");
+            e.preventDefault();
+        }
+    });
+</script> *@

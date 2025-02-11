@@ -3,6 +3,10 @@ using BookRent.App.Common;
 using BookRent.API.Mapper;
 using BookRent.Application.Interfaces.IRepository;
 using BookRent.Infrastructure.Interfaces.Repository;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.ComponentModel.Design;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +21,10 @@ builder.Services.AddHttpClient("MyAPIClient", (serviceProvider, client) =>
     var appSettings = serviceProvider.GetRequiredService<IOptions<MyApiSettings>>().Value;
     client.BaseAddress = new Uri(appSettings.BaseAddress);
 });
+
+builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>();
+
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 var config = new AutoMapper.MapperConfiguration(options =>
 {

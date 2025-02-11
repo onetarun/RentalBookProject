@@ -15,6 +15,7 @@ namespace BookRent.API.Mapper
                 .ForMember(dest => dest.Genre, opt => opt.MapFrom(MapToGenre));
                 //.ForMember(dest => dest.Genre, opt => opt.Ignore());
 
+<<<<<<< HEAD
             CreateMap<Book, VMBook>()
                 .ForMember(dest => dest.Genre, opt => opt.MapFrom(MapToVMGenre))
                 .ForMember(dest => dest.BookImage, opt => opt.Ignore());
@@ -22,6 +23,12 @@ namespace BookRent.API.Mapper
 
             CreateMap<Book,VMBookList>()
                 .ForMember(dest => dest.GenreName, opt=>opt.MapFrom(opt=> opt.Genre.Title));
+=======
+            CreateMap<VMUserRegisteration, UserRegisteration>();
+            CreateMap<UserRegisteration, VMUserRegisteration>();
+
+            CreateMap<Book,VMBookList>();
+>>>>>>> feature/implement-project1
 
             CreateMap<VMBookList,Book>()
             .ForMember(dest => dest.BookDimensions, opt=>opt.Ignore())
