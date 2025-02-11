@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BookRent.API.Services
 {
-    public class Token : ITokenService
+    public class TokenService : ITokenService
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -16,7 +16,7 @@ namespace BookRent.API.Services
 
         private readonly IConfiguration _configuration;
 
-        public Token(UserManager<ApplicationUser> userManager, IConfiguration configuration)
+        public TokenService(UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
             _userManager = userManager;

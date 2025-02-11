@@ -1,23 +1,15 @@
-<<<<<<< HEAD
-﻿namespace BookRent.API.DTOs
-{
-    public class UserRegisterationDTO
-    {
-        public string Email { get; set; }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Password { get; set; }
-=======
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookRent.API.DTOs
+namespace BookRent.Domain.Entities
 {
-    public class UserRegisterationDTO
+    public class UserRegisteration
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
@@ -25,6 +17,5 @@ namespace BookRent.API.DTOs
         public string Role { get; set; } // Role-based access
         public List<string> Permissions { get; set; } = new();
 
->>>>>>> feature/implement-project1
     }
 }

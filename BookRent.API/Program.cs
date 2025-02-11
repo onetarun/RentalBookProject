@@ -2,10 +2,13 @@
 
 using System.Text;
 using BookRent.API.Mapper;
+using BookRent.API.Models;
+using BookRent.API.Services;
 using BookRent.Application.Interfaces.IRepository;
 using BookRent.Infrastructure.Data;
 using BookRent.Infrastructure.Interfaces.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -24,6 +27,13 @@ namespace BookRentAPI
             });
 
             // Add services to the container.
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+            builder.Services.AddScoped<ITokenService, TokenService>();
 
             builder.Services.AddControllers();
 

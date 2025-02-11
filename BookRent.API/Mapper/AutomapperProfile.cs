@@ -11,6 +11,7 @@ namespace BookRent.API.Mapper
             CreateMap<GenreDTO, Genre>();
             CreateMap<Genre, GenreDTO>();
 
+<<<<<<< HEAD
             CreateMap<BookDTO, Book>()
                  .ForMember(dest => dest.Genre, opt => opt.Ignore());
             //.ForMember(dest => dest.Genre, opt => opt.MapFrom(MapToGenre));
@@ -51,6 +52,24 @@ namespace BookRent.API.Mapper
         //    dtolist.Title = book.Genre.Title;
 
         //    return dtolist;
+=======
+            CreateMap<UserRegisterationDTO, UserRegisteration>();
+            CreateMap<UserRegisteration, UserRegisterationDTO>();
+
+            CreateMap<BookDTO, Book>();
+            CreateMap<Book, BookDTO>();
+                //.ForMember(dest => dest.Genre, opt => opt.MapFrom(MapToGenreDTO));
+        }
+        //public List<GenreDTO> MapToGenreDTO(Book book,BookDTO dto)
+        //{
+        //    List<GenreDTO> dtolist = new List<GenreDTO>();
+        //    if(book.Genre != null)
+        //    {
+        //        foreach (var item in book.Genre.Title)
+        //        {
+        //            dtolist.Add(new GenreDTO { Title = item });
+        //        }
+>>>>>>> feature/implement-project1
 
         //}
 
